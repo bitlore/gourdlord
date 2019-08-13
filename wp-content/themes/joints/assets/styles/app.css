@@ -1,0 +1,45 @@
+
+
+
+.top-bar {
+	padding: 1em 0;
+}
+.top-bar, .top-bar > ul, .top-bar > div > ul {
+	background-color: transparent;
+}
+.top-bar > div > ul {
+	justify-content: space-between;
+}
+
+div.container {
+	width: 100%;
+	max-width: 1000px;
+	margin: 0 auto;
+	padding: 0 1em;
+}
+@media screen only and (min-width:600px) {
+	div.container {
+		padding: 0 3em;
+	}
+}
+
+#top-bar-menu {
+	position: relative;
+	color: black ;
+	background-color: transparent;
+}
+#top-bar-menu a {
+	color: black;
+}
+#top-bar-menu a::after {
+	content: none;
+}
+#top-bar-menu::after {
+	content: '';
+	position: absolute;
+	display: block;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	border-bottom: 1px solid black; 
+}
