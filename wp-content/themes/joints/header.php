@@ -25,7 +25,7 @@
     
 		<?php wp_head(); ?>
     
-    <link rel="stylesheet" href="wp-content/themes/joints/assets/styles/app.css">
+    <link rel="stylesheet" href="/gourdlord/wp-content/themes/joints/assets/styles/app.css">
         
 	</head>
 			

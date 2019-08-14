@@ -1,11 +1,4 @@
-<?php 
-/**
- * The template for displaying all pages
- *
- * This is the template that displays all pages by default.
- */
-
-get_header(); ?>
+<?php get_header(); ?>
 	
 	<div class="content">
 	
@@ -20,8 +13,6 @@ get_header(); ?>
 			    <?php endwhile; endif; ?>							
 			    					
 			</main> <!-- end #main -->
-
-		    <?php get_sidebar(); ?>
 		    
 		</div> <!-- end #inner-content -->
 
