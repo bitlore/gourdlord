@@ -16,6 +16,13 @@ function get_current_template( $echo = false ) {
         return $GLOBALS['current_theme_template'];
 }
 
+function custom_add_google_fonts() {
+ wp_enqueue_style( 'custom-google-fonts',
+ 'https://fonts.googleapis.com/css?family=Lobster|Open+Sans:400,400i,700',
+ false );
+}
+add_action( 'wp_enqueue_scripts', 'custom_add_google_fonts' );
+
 // Theme support options
 require_once(get_template_directory().'/functions/theme-support.php'); 
 

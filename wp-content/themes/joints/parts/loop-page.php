@@ -9,9 +9,11 @@
 	<header class="article-header">
 		<h1 class="page-title"><?php the_title(); ?></h1>
 	</header> <!-- end article header -->
-					
-    <section class="entry-content" itemprop="text">
-	    <?php the_content(); ?>
+	
+	<img class="down-bracket" src="/gourdlord/wp-content/themes/joints/assets/images/line-bracket.png" alt="large open bracket facing down">
+	
+  <section class="entry-content" itemprop="text">
+	   <?php the_content(); ?>
 	</section> <!-- end article section -->
 						
 	<footer class="article-footer">
