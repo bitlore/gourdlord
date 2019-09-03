@@ -7,7 +7,7 @@ Donate link: https://www.paypal.me/vaakash/6
 License: GPLv2 or later
 Requires at least: 4.4.0
 Tested up to: 5.2.2
-Stable tag: 4.5
+Stable tag: 4.6
 
 Create custom "Shortcodes" easily for HTML, JavaScript snippets and use the shortcodes within posts, pages & widgets.
 
@@ -90,6 +90,11 @@ Note: When you disable a shortcode, the shortcode will not be executed in the pa
 [More Screenshots](https://www.aakashweb.com/wordpress-plugins/shortcoder/)
 
 == Changelog ==
+
+= 4.6 =
+* Fix: Show proper error when shortcoder saving fails.
+* Fix: Shortcode metadata throws undefined url error sometimes.
+* Fix: Show proper error when Code editor fails to load.
 
 = 4.5 =
 * Fix: Copy shortcode box having incorrect width.

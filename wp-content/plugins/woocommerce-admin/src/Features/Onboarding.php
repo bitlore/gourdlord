@@ -119,19 +119,19 @@ class Onboarding {
 				),
 				'subscriptions' => array(
 					'label'   => __( 'Subscriptions', 'woocommerce-admin' ),
-					'product' => 'woocommerce-subscriptions',
+					'product' => 27147,
 				),
 				'memberships'   => array(
 					'label'   => __( 'Memberships', 'woocommerce-admin' ),
-					'product' => 'woocommerce-memberships',
+					'product' => 958589,
 				),
 				'composite'     => array(
 					'label'   => __( 'Composite Products', 'woocommerce-admin' ),
-					'product' => 'woocommerce-composite-products',
+					'product' => 216836,
 				),
 				'bookings'      => array(
 					'label'   => __( 'Bookings', 'woocommerce-admin' ),
-					'product' => 'WooCommerce Bookings',
+					'product' => 390890,
 				),
 			)
 		);
@@ -267,9 +267,9 @@ class Onboarding {
 		$product_data = json_decode( $woocommerce_products['body'] );
 		$products     = array();
 
-		// Map product data by slug.
+		// Map product data by ID.
 		foreach ( $product_data->products as $product_datum ) {
-			$products[ $product_datum->slug ] = $product_datum;
+			$products[ $product_datum->id ] = $product_datum;
 		}
 
 		// Loop over product types and append data.
@@ -311,12 +311,45 @@ class Onboarding {
 
 		// Only fetch if the onboarding wizard is incomplete.
 		if ( $this->should_show_profiler() ) {
-			$settings['onboarding']['productTypes'] = self::get_allowed_product_types();
-			$settings['onboarding']['themes']       = self::get_themes();
-			$settings['onboarding']['activeTheme']  = get_option( 'stylesheet' );
+			$settings['onboarding']['productTypes']  = self::get_allowed_product_types();
+			$settings['onboarding']['themes']        = self::get_themes();
+			$settings['onboarding']['activeTheme']   = get_option( 'stylesheet' );
+			$settings['onboarding']['activePlugins'] = self::get_active_plugins();
 		}
 
 		return $settings;
+	}
+
+	/**
+	 * Gets an array of plugins that can be installed & activated via the onboarding wizard.
+	 *
+	 * @todo Handle edgecase of where installed plugins may have versioned folder names (i.e. `jetpack-master/jetpack.php`).
+	 */
+	public static function get_allowed_plugins() {
+		return apply_filters(
+			'woocommerce_onboarding_plugins_whitelist',
+			array(
+				'jetpack'              => 'jetpack/jetpack.php',
+				'woocommerce-services' => 'woocommerce-services/woocommerce-services.php',
+			)
+		);
+	}
+	/**
+	 * Get a list of active plugins, relevent to the onboarding wizard.
+	 *
+	 * @return array
+	 */
+	public static function get_active_plugins() {
+		$all_active_plugins   = get_option( 'active_plugins', array() );
+		$allowed_plugins      = self::get_allowed_plugins();
+		$active_plugin_files  = array_intersect( $all_active_plugins, $allowed_plugins );
+		$allowed_plugin_slugs = array_flip( $allowed_plugins );
+		$active_plugins = array();
+		foreach ( $active_plugin_files as $file ) {
+			$slug = $allowed_plugin_slugs[ $file ];
+			$active_plugins[] = $slug;
+		}
+		return $active_plugins;
 	}
 
 	/**

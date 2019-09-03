@@ -7,13 +7,13 @@
 
 		<div class="inner-content">
 	
-			<main id="fourohfour" class="main grix-x" role="main">
+			<main id="fourohfour" class="main grid-x grid-padding-x" role="main">
 				
-					<div class="cell">
+					<div class="cell medium-3 small-4">
 						<img src="/gourdlord/wp-content/themes/gourdlord/assets/images/404.png" alt="404" style="height:100%;">
 					</div>
 					
-					<div class="cell">
+					<div class="cell medium-9 small-8">
 						<h2 style="color:white;">Sorry! This page does not exist.</h2>
 					</div>
 					

@@ -173,10 +173,11 @@ class Shortcoder_Metadata{
                 'post_date' => get_the_date(),
                 'post_modified_date' => get_the_modified_date()
             );
-        }
-        
-        if( $d[ 'short_url' ] == '' ){
-            $d[ 'short_url' ] = $d[ 'url' ];
+
+            if( empty( $d[ 'short_url' ] ) ){
+                $d[ 'short_url' ] = $d[ 'url' ];
+            }
+
         }
         
         return $d;

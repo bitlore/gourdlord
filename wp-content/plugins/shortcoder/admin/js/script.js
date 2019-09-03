@@ -7,17 +7,21 @@ $(document).ready(function(){
     
     var init = function(){
         if(window.sc_cm_editor){
-            window.sc_cm = CodeMirror.fromTextArea( document.getElementById( 'sc_content' ), {
-                lineNumbers: true,
-                mode: "htmlmixed",
-                indentWithTabs: false,
-                lineWrapping: true,
-                styleActiveLine: true
-            });
-            sc_cm.setSize( null, 500 );
-            sc_cm.on( 'change', function(){
-                sc_cm.save();
-            });
+            if( typeof CodeMirror.fromTextArea !== 'undefined' ){
+                window.sc_cm = CodeMirror.fromTextArea( document.getElementById( 'sc_content' ), {
+                    lineNumbers: true,
+                    mode: "htmlmixed",
+                    indentWithTabs: false,
+                    lineWrapping: true,
+                    styleActiveLine: true
+                });
+                sc_cm.setSize( null, 500 );
+                sc_cm.on( 'change', function(){
+                    sc_cm.save();
+                });
+            }else{
+                alert('Cannot load code editor. Looks like there is a conflict with some other plugin.');
+            }
         }
         
         if( $.fn.selectize ){

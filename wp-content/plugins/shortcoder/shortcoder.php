@@ -4,11 +4,11 @@ Plugin Name: Shortcoder
 Plugin URI: https://www.aakashweb.com/
 Description: Shortcoder is a plugin which allows to create a custom shortcode and store HTML, JavaScript and other snippets in it. So if that shortcode is used in any post or pages, then the code stored in the shortcode get executed in that place. You can create a shortcode for Youtube videos, adsense ads, buttons and more.
 Author: Aakash Chakravarthy
-Version: 4.5
+Version: 4.6
 Author URI: https://www.aakashweb.com/
 */
 
-define( 'SC_VERSION', '4.5' );
+define( 'SC_VERSION', '4.6' );
 define( 'SC_PATH', plugin_dir_path( __FILE__ ) ); // All have trailing slash
 define( 'SC_URL', plugin_dir_url( __FILE__ ) );
 define( 'SC_ADMIN_URL', trailingslashit( plugin_dir_url( __FILE__ ) . 'admin' ) );

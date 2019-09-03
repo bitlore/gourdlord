@@ -368,16 +368,22 @@ class Shortcoder_Admin{
                 unset( $shortcodes[ $old_name ] );
             }
             
-            if( array_key_exists( $name, $shortcodes ) ){
-                self::print_notice( 2 );
-            }else{
-                self::print_notice( 1 );
-            }
-            
+            $is_new_shortcode = array_key_exists( $name, $shortcodes );
+
             $shortcodes[ $name ] = $values;
             
-            update_option( 'shortcoder_data', $shortcodes );
+            $save_success = update_option( 'shortcoder_data', $shortcodes );
             
+            if( $save_success ){
+                if( $is_new_shortcode ){
+                    self::print_notice( 2 );
+                }else{
+                    self::print_notice( 1 );
+                }
+            }else{
+                self::print_notice( 5 );
+            }
+
             if( $sc_name_changed ){
                 wp_safe_redirect( self::get_link( array(
                     'action' => 'edit',
@@ -593,6 +599,11 @@ class Shortcoder_Admin{
             $msg = __( 'Shortcode name edited successfully', 'shortcoder' );
         }
         
+        if( $id == 5 ){
+            $msg = __( 'Failed to save shortcode. Please check if any other plugin is interfering while saving the shortcode content.', 'shortcoder' );
+            $type = 'error';
+        }
+
         if( $msg != '' ){
             echo '<div class="notice notice-' . $type . ' is-dismissible"><p>' . $msg . '</p></div>';
         }
