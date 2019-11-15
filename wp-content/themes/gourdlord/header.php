@@ -25,7 +25,7 @@
     
 		<?php wp_head(); ?>
     
-    <link rel="stylesheet" href="/gourdlord/wp-content/themes/gourdlord/assets/styles/app.css">
+    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/styles/app.css">
         
 	</head>
 			

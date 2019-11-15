@@ -23,6 +23,62 @@ function custom_add_google_fonts() {
 }
 add_action( 'wp_enqueue_scripts', 'custom_add_google_fonts' );
 
+function gourdlord_add_woocommerce_support() {
+	add_theme_support( 'woocommerce' );
+}
+add_action( 'after_setup_theme', 'gourdlord_add_woocommerce_support' );
+
+add_action('template_redirect', 'remove_shop_breadcrumbs' );
+function remove_shop_breadcrumbs() {
+    if (is_shop())
+        remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20, 0);
+}
+
+
+add_action( 'pre_get_posts', 'iconic_hide_out_of_stock_products' );
+ 
+function iconic_hide_out_of_stock_products( $q ) {
+ 
+    if ( ! $q->is_main_query() || is_admin() ) {
+        return;
+    }
+ 
+    if ( $outofstock_term = get_term_by( 'name', 'outofstock', 'product_visibility' ) ) {
+ 
+        $tax_query = (array) $q->get('tax_query');
+ 
+        $tax_query[] = array(
+            'taxonomy' => 'product_visibility',
+            'field' => 'term_taxonomy_id',
+            'terms' => array( $outofstock_term->term_taxonomy_id ),
+            'operator' => 'NOT IN'
+        );
+ 
+        $q->set( 'tax_query', $tax_query );
+ 
+    }
+ 
+    remove_action( 'pre_get_posts', 'iconic_hide_out_of_stock_products' );
+ 
+}
+
+add_action( 'wp_head', 'quantity_wp_head' );
+function quantity_wp_head() {
+  if ( is_product() ) {
+  ?>
+    <style type="text/css">.quantity, .buttons_added { width:0; height:0; display: none; visibility: hidden; }</style>
+  <?php }
+}   
+
+// Remove the sorting dropdown from Woocommerce
+remove_action( 'woocommerce_before_shop_loop' , 'woocommerce_catalog_ordering', 30 );
+// Remove the result count from WooCommerce
+remove_action( 'woocommerce_before_shop_loop' , 'woocommerce_result_count', 20 );
+
+function disable_woo_commerce_sidebar() {
+	remove_action( 'woocommerce_sidebar', 'woocommerce_get_sidebar', 10); 
+}
+add_action('init', 'disable_woo_commerce_sidebar');
 
 
 // function add_event_handlers() {

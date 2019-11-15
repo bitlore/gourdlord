@@ -10,7 +10,7 @@
 		<h1 class="page-title"><?php the_title(); ?></h1>
 	</header> <!-- end article header -->
 	
-	<img class="down-bracket" src="/gourdlord/wp-content/themes/gourdlord/assets/images/bracket.png" alt="large open bracket facing down">
+	<!-- <img class="down-bracket" src="/gourdlord/wp-content/themes/gourdlord/assets/images/bracket.png" alt="large open bracket facing down"> -->
 	
   <section class="entry-content" itemprop="text">
 	   <?php the_content(); ?>
