@@ -31,22 +31,16 @@ do_action( 'woocommerce_before_main_content' );
 ?>
 <header class="woocommerce-products-header">
 
-	<?php
-	/**
-	 * Hook: woocommerce_archive_description.
-	 *
-	 * @hooked woocommerce_taxonomy_archive_description - 10
-	 * @hooked woocommerce_product_archive_description - 10
-	 */
-	do_action( 'woocommerce_archive_description' );
-	?>
 </header>
 
 <?php if (is_product_category()) : ?>
 	<h1>
-		<?php echo single_term_title(); ?> 
+		<?php echo ( is_product_category('Gourds') ? 'Gourd collections' : single_term_title()); ?> 
 	</h1>
-<?php endif;  ?>
+<?php
+	do_action( 'woocommerce_archive_description' );
+	endif;
+?>
 
 <?php
 if ( woocommerce_product_loop() ) {
@@ -62,19 +56,25 @@ if ( woocommerce_product_loop() ) {
 
 	woocommerce_product_loop_start();
 
-	if ( wc_get_loop_prop( 'total' ) ) {
-		while ( have_posts() ) {
-			the_post();
+	$cat = get_queried_object();
 
+	//loop normally if subcategory page
+	//shop page and category page use custom loop defined in gourdlord-categories plugin
+	if ( wc_get_loop_prop( 'total' ) && (0 < $cat->parent) ) {
+		
+		while ( have_posts() ) {
+		
+			the_post();
+		
 			/**
 			 * Hook: woocommerce_shop_loop.
 			 */
 			do_action( 'woocommerce_shop_loop' );
-
+		
 			if (is_product_category()) {
 				wc_get_template_part( 'content', 'product' );
 			}
-
+		
 		}
 	}
 

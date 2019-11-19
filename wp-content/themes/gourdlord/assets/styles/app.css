@@ -12,18 +12,31 @@ body {
 	background-color: #f7f7f7;
 	font-size: 12pt;
 }
+@media screen and (max-width:1000px) {
+	body { font-size: 10pt; }
+}
+@media screen and (max-width:600px) {
+	body { font-size: 8pt; }
+}
 body * {
 	font-family: 'Montserrat', Helvetica, sans-serif;
 }
 body h1 {
+	font-size: 4em;
 	font-family: 'Lobster';
+	text-align: left;
+	margin-bottom: 0.5em;
 }
 h2 {
-	font-size: 4em;
+	font-size: 3em;
 	margin-bottom: 0.5em;
+}
+h2.big { 
+	font-size: 4em;
 }
 main {
 	width: 100% !important;
+	position: relative;
 }
 main > * {
 	max-width: calc(100% - 1rem);
@@ -36,7 +49,7 @@ h1 {
 	text-align: center;
 	margin-bottom: 0.75em;
 }
-h2 {
+li.category h2 {
 	font-family: 'Lobster';
 }
 
@@ -149,6 +162,47 @@ img.lockup-lg {
 	max-height: calc(100vh - 10em);
 }
 
+div.off-canvas-wrapper {
+	overflow: visible;
+}
+
+li.left {
+	width: 50%;
+	margin-top: 0;
+	margin-bottom: 0;
+	cursor: pointer;
+}
+li.left a {
+	display: block;
+}
+li.left > * {
+	margin-bottom: 0;
+}
+div.right {
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 50%;
+	height: calc(100vh - 10em);
+	background-position: top;
+	background-repeat: no-repeat;
+	background-size: cover;
+	z-index: 1;
+	opacity: 0;
+	transition: opacity .2s linear;
+}
+div.right.show {
+	z-index: 0;
+	opacity: 1;
+}
+li.left:hover div.right, li.left:active div.right {
+	opacity: 1;
+}
+@media screen and (max-width: 1000px) {
+	div.left { width: auto; }
+	div.right { display: none; }
+}
+
 #top-bar-menu {
 	position: relative;
 	color: black ;
@@ -235,4 +289,17 @@ main#fourohfour {
 .woocommerce .product .add_to_cart_button.button.alt{
 	background-color: #EDA176 !important;
 	color: #FFFFFF !important;
+}
+
+ul.products a.add_to_cart_button {
+	display: none !important;
+}
+span.price {
+	color: #8B996A !important;
+}
+div.product_meta {
+	display: none;
+}
+article {
+	max-width: 100%;
 }

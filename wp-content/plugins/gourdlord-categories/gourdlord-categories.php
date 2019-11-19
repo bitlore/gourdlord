@@ -20,17 +20,31 @@ function gourdlord_product_subcategories( $args = array() ) {
 
 	if ( $terms ) {
 		 echo '<ul class="product-cats">';
+         $i = 0;
 				 foreach ( $terms as $term ) {
            if ($term->name !== 'Uncategorized') {             
-             echo '<li class="category">';   
+             echo '<li class="category ' . ( is_shop() ? 'left' : '') . '">';   
              // woocommerce_subcategory_thumbnail( $term );
-             echo '<h2>';
-             echo '<a href="' .  esc_url( get_term_link( $term ) ) . '" class="' . $term->slug . '">';
-             echo $term->name;
-             echo '</a>';
-             echo '</h2>';
+               echo '<h2 class="big">';
+                 echo '<a href="' .  esc_url( get_term_link( $term ) ) . '" class="' . $term->slug . '">';
+                   echo $term->name;
+                 echo '</a>';
+               echo '</h2>';
+               
+               if ( is_shop() ) {
+                 $cat_thumb_id = get_woocommerce_term_meta( $term->term_id, 'thumbnail_id', true );
+                 $shop_catalog_img = wp_get_attachment_image_src( $cat_thumb_id, 'shop_catalog' );
+                 echo '<div class="right ' . ($i === 0 ? 'show' : '') . '" style="background-image:
+                  url('.$shop_catalog_img[0].')">';
+                 echo '</div>';
+               }
+               else {
+                 echo do_shortcode('[product_category category="'.$term->name.'"]');
+               }
+               
              echo '</li>';
            }
+           $i++;
 		     }
 		 echo '</ul>';
 		}

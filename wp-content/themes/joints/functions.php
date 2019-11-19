@@ -23,6 +23,14 @@ function custom_add_google_fonts() {
 }
 add_action( 'wp_enqueue_scripts', 'custom_add_google_fonts' );
 
+// if ( ! function_exists( ‘woocommerce_template_loop_product_title’ ) ) {
+//   /**
+//   * Show the product title in the product loop. By default this is an H2.
+//   */
+//   function woocommerce_template_loop_product_title() {
+//     echo ‘<h3 class=”woocommerce-loop-product__title”>’ . get_the_title() . ‘</h3>’;
+//   }
+// }
 
 
 // function add_event_handlers() {
