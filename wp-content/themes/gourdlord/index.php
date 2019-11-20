@@ -6,7 +6,6 @@
 			event.preventDefault();
 			let links = Array.prototype.slice.call(document.getElementsByClassName('post-link'));
 			links.forEach( link => {
-				//debugger;
 				if (link.classList.contains('active') && link.id !== event.target.id) {
 					link.classList.remove('active');
 				} else if (link.id === event.target.id) {
@@ -22,33 +21,32 @@
 
 	<div class="content">
 	
-		<div class="inner-content grid-x grid-margin-x grid-padding-x">
+		<div class="inner-content grid-x grid-padding-x">
 	
-		    <main id="posts"  class="main small-12 medium-8 large-8 cell flex" role="main"> 
-
-					<div class="left">
-						
-						<h2 style="text-align: center;">
-							Stories
-						</h2>
+		    <main id="posts"  class="main small-12 medium-8 large-8 cell" role="main"> 
 						
 						<ul>
 							
+							<li class="left" style="cursor:default;">
+								<h1>Stories</h1>
+							</li>
+							
 							<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 					 									
-								<li id="link-<?php echo $post->ID ?>" class="post-link <?php if (is_sticky()) { echo 'active'; } ?>">
-									<h3>
+								<li id="link-<?php echo $post->ID ?>" class="post-link left">
+									<h2>
 										<a href="<?php the_permalink(); ?>">
 											<?php the_title(); ?>
 										</a>
-									</h3>
+									</h2>
+									<?php
+									if ( has_post_thumbnail() ) {
+										$image_url = get_the_post_thumbnail_url($post,'large');
+										echo '<div class="right dynamic '.(is_sticky() ? 'show' : '').'" style="background-image:url('.$image_url.');"></div>';
+									}
+									?>
 								</li>
 								
-								<?php
-									if (is_sticky($post->ID) && has_post_thumbnail()) {
-										$image_url = get_the_post_thumbnail_url($post,'large');
-									}
-								?>
 								
 							<?php endwhile; ?>
 								<?php joints_page_navi(); ?>
@@ -57,11 +55,6 @@
 							<?php endif; ?>
 							
 						</ul>
-
-					</div>
-					
-					<div class="right" style="background-image: url(<?php echo $image_url; ?>);">	
-					</div>
 					
 		    </main> <!-- end #main -->
 		    

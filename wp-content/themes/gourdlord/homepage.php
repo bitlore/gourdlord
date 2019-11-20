@@ -8,11 +8,11 @@
 
 <?php get_header(); ?>
 
-	<div class="content">
+	<div class="content container">
 
 		<div class="inner-content grid-x grid-margin-x grid-padding-x">
 
-			<main class="main small-12 large-8 medium-8 cell" role="main">
+			<main id="homepage-main" class="main small-12 large-8 medium-8 cell" role="main">
 
 				<img class="lockup-lg" src="wp-content/themes/gourdlord/assets/images/gourdlord_lockup_lg.png" alt="gourd lord co">
 

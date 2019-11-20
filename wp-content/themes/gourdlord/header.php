@@ -31,7 +31,7 @@
 			
 	<body <?php body_class(); ?>>
     
-    <div class="container">
+    <div> <!-- this div was the container -->
 
   		<div class="off-canvas-wrapper">
   			

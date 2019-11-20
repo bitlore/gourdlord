@@ -19,6 +19,11 @@ defined( 'ABSPATH' ) || exit;
 
 get_header( 'shop' );
 
+?>
+
+<div class="<?php echo is_shop() ? '' : 'container' ; ?>">
+
+<?php
 /**
  * Hook: woocommerce_before_main_content.
  *
@@ -29,75 +34,76 @@ get_header( 'shop' );
 do_action( 'woocommerce_before_main_content' );
 
 ?>
-<header class="woocommerce-products-header">
 
-</header>
-
-<?php if (is_product_category()) : ?>
-	<h1>
-		<?php echo ( is_product_category('Gourds') ? 'Gourd collections' : single_term_title()); ?> 
-	</h1>
-<?php
-	do_action( 'woocommerce_archive_description' );
-	endif;
-?>
-
-<?php
-if ( woocommerce_product_loop() ) {
-
-	/**
-	 * Hook: woocommerce_before_shop_loop.
-	 *
-	 * @hooked woocommerce_output_all_notices - 10
-	 * @hooked woocommerce_result_count - 20
-	 * @hooked woocommerce_catalog_ordering - 30
-	 */
-	do_action( 'woocommerce_before_shop_loop' );
-
-	woocommerce_product_loop_start();
-
-	$cat = get_queried_object();
-
-	//loop normally if subcategory page
-	//shop page and category page use custom loop defined in gourdlord-categories plugin
-	if ( wc_get_loop_prop( 'total' ) && (0 < $cat->parent) ) {
-		
-		while ( have_posts() ) {
-		
-			the_post();
-		
-			/**
-			 * Hook: woocommerce_shop_loop.
-			 */
-			do_action( 'woocommerce_shop_loop' );
-		
-			if (is_product_category()) {
-				wc_get_template_part( 'content', 'product' );
-			}
-		
-		}
-	}
-
-	woocommerce_product_loop_end();
-
-	/**
-	 * Hook: woocommerce_after_shop_loop.
-	 *
-	 * @hooked woocommerce_pagination - 10
-	 */
-	do_action( 'woocommerce_after_shop_loop' );
-} else if (is_product_category()) {
-		echo "<p>Sorry! We don't currently have any products in this category.</p>";
-} else {
-	/**
-	 * Hook: woocommerce_no_products_found.
-	 *
-	 * @hooked wc_no_products_found - 10
-	 */
-	do_action( 'woocommerce_no_products_found' );
 	
-}
-
+	<header class="woocommerce-products-header">
+		
+	</header>
+	
+	<?php if (is_product_category()) : ?>
+		<h1>
+			<?php echo ( is_product_category('Gourds') ? 'Gourd collections' : single_term_title()); ?> 
+		</h1>
+		<?php
+		do_action( 'woocommerce_archive_description' );
+	endif;
+	?>
+	
+	<?php
+	if ( woocommerce_product_loop() ) {
+		
+		/**
+		* Hook: woocommerce_before_shop_loop.
+		*
+		* @hooked woocommerce_output_all_notices - 10
+		* @hooked woocommerce_result_count - 20
+		* @hooked woocommerce_catalog_ordering - 30
+		*/
+		do_action( 'woocommerce_before_shop_loop' );
+		
+		woocommerce_product_loop_start();
+		
+		$cat = get_queried_object();
+		
+		//loop normally if subcategory page
+		//shop page and category page use custom loop defined in gourdlord-categories plugin
+		if ( wc_get_loop_prop( 'total' ) && (0 < $cat->parent) ) {
+			
+			while ( have_posts() ) {
+				
+				the_post();
+				
+				/**
+				* Hook: woocommerce_shop_loop.
+				*/
+				do_action( 'woocommerce_shop_loop' );
+				
+				if (is_product_category()) {
+					wc_get_template_part( 'content', 'product' );
+				}
+				
+			}
+		}
+		
+		woocommerce_product_loop_end();
+		
+		/**
+		* Hook: woocommerce_after_shop_loop.
+		*
+		* @hooked woocommerce_pagination - 10
+		*/
+		do_action( 'woocommerce_after_shop_loop' );
+	} else if (is_product_category()) {
+		echo "<p>Sorry! We don't currently have any products in this category.</p>";
+	} else {
+		/**
+		* Hook: woocommerce_no_products_found.
+		*
+		* @hooked wc_no_products_found - 10
+		*/
+		do_action( 'woocommerce_no_products_found' );
+		
+	}
 /**
  * Hook: woocommerce_after_main_content.
  *
@@ -105,6 +111,11 @@ if ( woocommerce_product_loop() ) {
  */
 do_action( 'woocommerce_after_main_content' );
 
+?>
+
+</div>
+
+<?php
 /**
  * Hook: woocommerce_sidebar.
  *

@@ -35,8 +35,10 @@ h2.big {
 	font-size: 4em;
 }
 main {
-	width: 100% !important;
 	position: relative;
+	width: 100% !important;
+	max-width: 100vw;
+	padding: 0 !important;
 }
 main > * {
 	max-width: calc(100% - 1rem);
@@ -80,6 +82,9 @@ li.category a:hover {
 .flex {
 	display: flex;
 }
+.lobster {
+	font-family: 'Lobster';
+}
 
 p.block {
 	margin-bottom: 3em;
@@ -91,9 +96,10 @@ p.block:last-child {
 	margin-bottom: 0;
 }
 
+
+
 .top-bar {
 	padding: 1em 0;
-	margin-bottom: 2em;
 }
 .top-bar, .top-bar > ul, .top-bar > div > ul {
 	background-color: transparent;
@@ -119,9 +125,8 @@ p.block:last-child {
 
 div.container {
 	width: 100%;
-	max-width: 1000px;
+	max-width: 60em;
 	margin: 0 auto;
-	padding: 0 1em;
 }
 @media screen only and (min-width:600px) {
 	div.container {
@@ -166,8 +171,17 @@ div.off-canvas-wrapper {
 	overflow: visible;
 }
 
+div.left, div.right {
+	flex: 1 1 50%;
+	min-height: calc(100vh - 6em);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+
 li.left {
-	width: 50%;
+	width: 60%;
 	margin-top: 0;
 	margin-bottom: 0;
 	cursor: pointer;
@@ -178,36 +192,60 @@ li.left a {
 li.left > * {
 	margin-bottom: 0;
 }
-div.right {
+div.right.dynamic {
 	position: absolute;
-	top: 0;
-	right: 0;
+	top: -20px;
+	/* right: 0; */
+	right: 80px;
 	left: 50%;
-	height: calc(100vh - 10em);
-	background-position: top;
-	background-repeat: no-repeat;
-	background-size: cover;
 	z-index: 1;
 	opacity: 0;
-	transition: opacity .2s linear;
+	height: calc(100vh - 160px);
+	min-height: calc(100vh - 160px);
+	max-height: calc(100vh - 160px);
+	font-size: 100% !important;
+	transition: opacity .1s linear;
 }
 div.right.show {
 	z-index: 0;
 	opacity: 1;
 }
+li.left:first-of-type {
+	margin-top: 20px;
+}
 li.left:hover div.right, li.left:active div.right {
 	opacity: 1;
 }
-@media screen and (max-width: 1000px) {
-	div.left { width: auto; }
-	div.right { display: none; }
+li.left:hover h2 {
+	background-color: #EDA176;
+}
+li.left:hover a, li.left a:active {
+	color: white;
 }
 
+li.left h2 {
+	position: relative;
+	margin: 0;
+	padding: 30px 20% 30px 40px;
+	z-index: 2;
+	transition: .1s background-color linear;
+}
+li.left h2.big {
+	padding: 10px 20% 10px 40px;
+}
+/* @media screen and (max-width: 600px) {
+	div.left { width: auto; }
+	div.right { display: none; }
+} */
 #top-bar-menu {
 	position: relative;
-	color: black ;
-	/* background-color: #f7f7f7; */
-	background-color: transparent;
+	color: black;
+	background-color: #f7f7f7;
+	height: 80px;
+}
+#top-bar-menu-inner-content {
+	max-width: 60em;
+	margin: 0 auto;
 }
 #top-bar-menu a:first-child {
 	padding-left: 0;
@@ -218,7 +256,7 @@ li.left:hover div.right, li.left:active div.right {
 #top-bar-menu a::after {
 	content: none;
 }
-#top-bar-menu::after {
+/* #top-bar-menu::after {
 	content: '';
 	position: absolute;
 	display: block;
@@ -226,8 +264,11 @@ li.left:hover div.right, li.left:active div.right {
 	right: 0;
 	bottom: 0;
 	border-bottom: 1px solid black; 
-}
+} */
 
+#top-bar-menu.light {
+	background-color: transparent;
+}
 #top-bar-menu.light a {
 	color: #f7f7f7;
 }
@@ -238,48 +279,40 @@ li.left:hover div.right, li.left:active div.right {
 	color: #f7f7f7;
 }
 
+/* main#homepage-main {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+} */
+main#homepage-main img {
+	/* flex: 0 0 auto;
+	width: auto; */
+	margin-top: 2em;
+}
+
 main#posts {
-	margin: 2em 0;
-	height: calc(100vh - 14em);
+	height: calc(100vh - 80px);
 	overflow: hidden; 
 }
 main#posts h1 {
 	margin-top: 0.75em;
 }
-
-main#posts > div.left {
-	flex: 0 0 20em;
-	height: 100%;
-}
 main#posts ul {
 	overflow-y: auto;
 }
-main#posts li {
-	padding: 1.5em;
-	transition: .1s background-color linear;
-}
-main#posts li:hover {
-	background-color: #EDA176;
-}
-main#posts li.active {
-	background-color: #EDA176;
-}
-main#posts h3 {
+
+main#posts h2 {
+	position: relative;
 	font-size: 1.25em;
-	margin: 0;
-}
-main#posts a:hover {
-	color: black;
-}
-main#posts > div.right {
-	flex: 1 1 auto;
-	height: 100%;
-	background-size: cover;
-	background-position: center;
 }
 
 main#fourohfour {
 	height: calc(100vh - 10em);
+}
+
+#home-lockup {
+	background-position: left;
+	background-size: auto;
 }
 
 .single-product .product .single_add_to_cart_button.button.alt{

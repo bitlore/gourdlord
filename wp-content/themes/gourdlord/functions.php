@@ -80,6 +80,10 @@ function disable_woo_commerce_sidebar() {
 }
 add_action('init', 'disable_woo_commerce_sidebar');
 
+add_filter( 'woocommerce_product_subcategories_hide_empty', 'ts_hide_empty_categories', 10, 1 );
+function ts_hide_empty_categories ( $hide_empty ) {
+  $hide_empty = FALSE;
+}
 
 // function add_event_handlers() {
 //   if(is_page()){
