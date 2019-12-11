@@ -42,7 +42,7 @@ do_action( 'woocommerce_before_main_content' );
 	
 	<?php if (is_product_category()) : ?>
 		<h1>
-			<?php echo ( is_product_category('Gourds') ? 'Gourd collections' : single_term_title()); ?> 
+			<?php echo single_term_title(); ?> 
 		</h1>
 		<?php
 		do_action( 'woocommerce_archive_description' );

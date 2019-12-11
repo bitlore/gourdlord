@@ -6,9 +6,10 @@
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(''); ?> role="article" itemscope itemtype="http://schema.org/WebPage">
 						
-	<header class="article-header">
+	<!-- <header class="article-header">
 		<h1 class="page-title"><?php the_title(); ?></h1>
-	</header> <!-- end article header -->
+	</header> -->
+	<!-- end article header -->
 	
 	<!-- <img class="down-bracket" src="/gourdlord/wp-content/themes/gourdlord/assets/images/bracket.png" alt="large open bracket facing down"> -->
 	

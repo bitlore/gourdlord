@@ -2,6 +2,7 @@
 /* high-orange : #EDA176 */
 /* off-white : #f7f7f7 */
 /* mate-green : #8B996A */
+/* deep-plum : #0C0B10 */
 
 
 /* global styles */
@@ -11,7 +12,14 @@ body {
 	overflow-x: hidden;
 	background-color: #f7f7f7;
 	font-size: 12pt;
+	color: #0C0B10;
 }
+/* body.no-grow {
+	height: 100vh !important;
+	max-height: 100vh !important;
+	min-height: 100vh !important;
+	overflow: hidden;
+} */
 @media screen and (max-width:1000px) {
 	body { font-size: 10pt; }
 }
@@ -34,11 +42,15 @@ h2 {
 h2.big { 
 	font-size: 4em;
 }
+h2.small { 
+	font-size: 2em;
+}
+
 main {
-	position: relative;
+	/* position: relative;
 	width: 100% !important;
 	max-width: 100vw;
-	padding: 0 !important;
+	padding: 0 !important; */
 }
 main > * {
 	max-width: calc(100% - 1rem);
@@ -56,7 +68,7 @@ li.category h2 {
 }
 
 a {
-	color: black;
+	color: #0C0B10;
 	font-family: inherit;
 	transition: color .1s linear;
 	/* text-decoration: underline; */
@@ -99,7 +111,7 @@ p.block:last-child {
 
 
 .top-bar {
-	padding: 1em 0;
+	padding: 1em;
 }
 .top-bar, .top-bar > ul, .top-bar > div > ul {
 	background-color: transparent;
@@ -120,7 +132,113 @@ p.block:last-child {
 .menu li.active > a {
 	background-color: transparent;
 	font-weight: bold;
-	color: black;
+	color: #0C0B10;
+}
+
+/* layout */
+div.off-canvas-content {
+	position: relative;
+	padding: 0 1em;
+	
+}
+header#gl-main-header {
+	position: fixed;
+	top:0;
+	left: 0;
+	right: 0;
+	height: 5em;
+	z-index: 10;
+	background-color: #f7f7f7;
+}
+div#gl-main-content {
+	margin-top: 5em;
+}
+#top-bar-menu {
+	position: relative;
+	color: #0C0B10;
+	background-color: #f7f7f7;
+	height: 5em;
+}
+#top-bar-menu ul {
+	display: flex;
+	justify-content: space-between;
+}
+#top-bar-menu li {
+	flex: 0 1 auto;
+	width: auto !important;
+}
+#top-bar-menu-inner-content {
+	max-width: 60em;
+	margin: 0 auto;
+}
+#top-bar-menu a:first-child {
+	padding-left: 0;
+}
+#top-bar-menu a:last-child {
+	padding-right: 0;
+}
+#top-bar-menu a::after {
+	content: none;
+}
+
+/* #top-bar-menu ul li:first-child {
+	text-align: left;
+}
+#top-bar-menu ul li:last-child {
+	text-align: right;
+} */
+
+/* remove when shop is open */
+#top-bar-menu li:last-child a {
+	text-decoration: line-through;
+}
+
+@media screen and (max-width:600px) {
+	header#gl-main-header {
+		padding: 0 0;
+	}
+	#top-bar-menu {
+		text-align: center;
+	}
+}
+
+/* #top-bar-menu::after {
+	content: '';
+	position: absolute;
+	display: block;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	border-bottom: 1px solid black; 
+} */
+
+#top-bar-menu.light {
+	background-color: transparent;
+}
+#top-bar-menu.light a {
+	color: #f7f7f7;
+}
+#top-bar-menu.light::after {
+	border-bottom-color: #f7f7f7;
+}
+#top-bar-menu.light .menu a:focus, #top-bar-menu.light .menu li:not(.active) a:hover {
+	color: #f7f7f7;
+}
+@media screen and (max-width:600px) {
+	/* header#gl-main-header {
+		height:2em;
+		padding: 0 2em;
+	}
+	div#gl-main-content {
+		margin-top: 2em;
+	}
+	#top-bar-menu {
+		height:2em;
+		padding: 0;
+	}
+	#top-bar-menu * {
+		padding: 0;
+	} */
 }
 
 div.container {
@@ -148,7 +266,7 @@ div.fade-to-black {
 		);
 }
 div.hero {
-	position: absolute;
+	position: fixed;
 	top: 0;
 	left: 0;
 	right: 0;
@@ -179,7 +297,9 @@ div.left, div.right {
 	background-size: cover;
 }
 
-
+ul.product-cats {
+	padding-top: 1.5em;
+}
 li.left {
 	width: 60%;
 	margin-top: 0;
@@ -193,91 +313,99 @@ li.left > * {
 	margin-bottom: 0;
 }
 div.right.dynamic {
-	position: absolute;
-	top: -20px;
-	/* right: 0; */
-	right: 80px;
+	position: fixed;
+	top: 5em;
+	right: 5em;
 	left: 50%;
+	bottom: 5em;
 	z-index: 1;
 	opacity: 0;
-	height: calc(100vh - 160px);
-	min-height: calc(100vh - 160px);
-	max-height: calc(100vh - 160px);
+	height: calc(100vh - 8.5em);
+	min-height: calc(100vh - 8.5em);
+	max-height: calc(100vh - 8.5em);
+	overflow: hidden;
 	font-size: 100% !important;
-	transition: opacity .1s linear;
+	transition: opacity .2s linear;
 }
+
 div.right.show {
 	z-index: 0;
 	opacity: 1;
 }
-li.left:first-of-type {
-	margin-top: 20px;
-}
 li.left:hover div.right, li.left:active div.right {
 	opacity: 1;
 }
-li.left:hover h2 {
+/* li.left:hover h2 {
 	background-color: #EDA176;
-}
+} */
 li.left:hover a, li.left a:active {
 	color: white;
 }
 
-li.left h2 {
+/* slide animation instead of fade */
+/* li.left h2 {
+	position: relative;
+	z-index: 0;
+}
+li.left h2::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	transform: translateX(-100%);
+	background-color: #EDA176;
+	transition: transform .3s ease-out;
+	z-index: -1;
+}
+li.left:hover h2::after {
+	transform: translateY(0);
+} */
+
+li.left h2, li.left h1 {
 	position: relative;
 	margin: 0;
 	padding: 30px 20% 30px 40px;
 	z-index: 2;
-	transition: .1s background-color linear;
 }
 li.left h2.big {
 	padding: 10px 20% 10px 40px;
 }
+li.left h2::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: -1em;
+	background-color: transparent;
+	transition: .2s background-color linear;
+	z-index: -1;
+}
+li.left:hover h2::after {
+	background-color: #EDA176;
+}
+
+@media screen and (max-width:600px) {
+	div.right.dynamic {
+		left: 90%;
+		right: 0;
+	}
+	li.left {
+		width: 100%;
+	}
+	li.left h2, li.left h1 {
+		padding: 20px 10% 20px 10px;
+	}
+}
+
+
+
 /* @media screen and (max-width: 600px) {
 	div.left { width: auto; }
 	div.right { display: none; }
 } */
-#top-bar-menu {
-	position: relative;
-	color: black;
-	background-color: #f7f7f7;
-	height: 80px;
-}
-#top-bar-menu-inner-content {
-	max-width: 60em;
-	margin: 0 auto;
-}
-#top-bar-menu a:first-child {
-	padding-left: 0;
-}
-#top-bar-menu a:last-child {
-	padding-right: 0;
-}
-#top-bar-menu a::after {
-	content: none;
-}
-/* #top-bar-menu::after {
-	content: '';
-	position: absolute;
-	display: block;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	border-bottom: 1px solid black; 
-} */
-
-#top-bar-menu.light {
-	background-color: transparent;
-}
-#top-bar-menu.light a {
-	color: #f7f7f7;
-}
-#top-bar-menu.light::after {
-	border-bottom-color: #f7f7f7;
-}
-#top-bar-menu.light .menu a:focus, #top-bar-menu.light .menu li:not(.active) a:hover {
-	color: #f7f7f7;
-}
 
 /* main#homepage-main {
 	display: flex;
@@ -291,20 +419,12 @@ main#homepage-main img {
 }
 
 main#posts {
-	height: calc(100vh - 80px);
-	overflow: hidden; 
+	height: calc(100vh - 5em);
 }
-main#posts h1 {
-	margin-top: 0.75em;
-}
-main#posts ul {
-	overflow-y: auto;
-}
-
-main#posts h2 {
-	position: relative;
-	font-size: 1.25em;
-}
+/* main#posts ul {
+	overflow-y: scroll;
+	overflow-x: visible;
+} */
 
 main#fourohfour {
 	height: calc(100vh - 10em);

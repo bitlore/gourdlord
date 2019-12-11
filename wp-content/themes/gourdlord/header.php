@@ -31,8 +31,6 @@
 			
 	<body <?php body_class(); ?>>
     
-    <div> <!-- this div was the container -->
-
   		<div class="off-canvas-wrapper">
   			
   			<!-- Load off-canvas container. Feel free to remove if not using. -->			
@@ -40,7 +38,7 @@
   			
   			<div class="off-canvas-content" data-off-canvas-content>
             				
-  				<header class="header" role="banner">
+  				<header class="header" role="banner" id="gl-main-header" style="background-color: <?php echo (is_front_page() ? 'transparent' : '#f7f7f7') ?>;">
   							
   					 <!-- This navs will be applied to the topbar, above all content 
   						  To see additional nav styles, visit the /parts directory -->
@@ -48,3 +46,5 @@
   	 	
              
   				</header> <!-- end .header -->
+          
+          <div id="gl-main-content"> <!-- this div was the container -->

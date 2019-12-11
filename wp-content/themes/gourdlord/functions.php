@@ -85,6 +85,19 @@ function ts_hide_empty_categories ( $hide_empty ) {
   $hide_empty = FALSE;
 }
 
+function get_images_attachment_url()
+{
+  global $post; 
+  $images_urls = array();
+
+  $images_objects = get_attached_media( 'image', $post->ID );
+
+  foreach ($images_objects as $image_object) {
+    $images_urls[] = wp_get_attachment_url ($image_object->ID);
+  } 
+  return $images_urls;
+}
+
 // function add_event_handlers() {
 //   if(is_page()){
 //     global $wp_query;

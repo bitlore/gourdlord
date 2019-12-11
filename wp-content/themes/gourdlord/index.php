@@ -20,21 +20,19 @@
 <?php $image_url = ''; ?>
 
 	<div class="content">
-	
-		<div class="inner-content grid-x grid-padding-x">
-	
-		    <main id="posts"  class="main small-12 medium-8 large-8 cell" role="main"> 
+		
+		    <main id="posts"> 
 						
-						<ul>
+						<ul style="text-align:right;">
 							
 							<li class="left" style="cursor:default;">
-								<h1>Stories</h1>
+								<h1 style="text-align:right;"><?php echo $pagename; ?></h1>
 							</li>
 							
 							<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 					 									
 								<li id="link-<?php echo $post->ID ?>" class="post-link left">
-									<h2>
+									<h2 class="small">
 										<a href="<?php the_permalink(); ?>">
 											<?php the_title(); ?>
 										</a>
@@ -58,8 +56,6 @@
 					
 		    </main> <!-- end #main -->
 		    
-		</div> <!-- end #inner-content -->
-
 	</div> <!-- end #content -->
 
 <?php get_footer(); ?>
