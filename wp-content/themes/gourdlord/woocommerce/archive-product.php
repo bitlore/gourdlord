@@ -66,8 +66,8 @@ do_action( 'woocommerce_before_main_content' );
 		$cat = get_queried_object();
 		
 		//loop normally if subcategory page
-		//shop page and category page use custom loop defined in gourdlord-categories plugin
-		if ( wc_get_loop_prop( 'total' ) && (0 < $cat->parent) ) {
+		//shop page and category page use custom loop defined in functions.php
+		if ( wc_get_loop_prop( 'total' ) ) {
 			
 			while ( have_posts() ) {
 				

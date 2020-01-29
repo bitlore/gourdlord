@@ -8,18 +8,10 @@
 
 <?php get_header(); ?>
 
-	<div class="content container">
-
-		<div class="inner-content grid-x grid-margin-x grid-padding-x">
-
-			<main id="homepage-main" class="main small-12 large-8 medium-8 cell" role="main">
-
-				<img class="lockup-lg" src="wp-content/themes/gourdlord/assets/images/gourdlord_lockup_lg.png" alt="gourd lord co">
-
-			</main> <!-- end #main -->
-
-		</div> <!-- end #inner-content -->
-
-	</div> <!-- end #content -->
+<div class="full-height-spacer">
+	<div class="image-wrapper">
+		<img class="lockup-lg" src="wp-content/themes/gourdlord/assets/images/gourdlord_lockup_lg.png" alt="gourd lord co">
+	</div>
+</div>
 
 <?php get_footer(); ?>

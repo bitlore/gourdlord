@@ -4,9 +4,9 @@
 
 	<div class="content">
 
-		<div class="inner-content grid-x grid-margin-x grid-padding-x">
+		<div class="inner-content grid-x">
 
-			<main id="storefront" class="main small-12 large-8 medium-8 cell" role="main">
+			<main id="storefront" class="small-12 large-8 medium-8 cell" role="main">
 
 				<ul>
 					

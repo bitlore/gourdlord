@@ -7,7 +7,7 @@
 
 		<div class="inner-content">
 	
-			<main id="fourohfour" class="main grid-x grid-padding-x" role="main">
+			<main id="fourohfour" class="grid-x grid-padding-x" role="main">
 				
 					<div class="cell medium-3 small-4">
 						<img src="/gourdlord/wp-content/themes/gourdlord/assets/images/404.png" alt="404" style="height:100%;">

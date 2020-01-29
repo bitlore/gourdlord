@@ -1,4 +1,4 @@
-<?php?>
+<?php ?>
 
 <!doctype html>
 
@@ -29,7 +29,9 @@
         
 	</head>
 			
-	<body <?php body_class(); ?>>
+  <?php $body_class = is_front_page() || is_404() ? 'superhero' : ''; ?>
+  
+	<body <?php body_class( $body_class ); ?>>
     
   		<div class="off-canvas-wrapper">
   			
@@ -38,13 +40,13 @@
   			
   			<div class="off-canvas-content" data-off-canvas-content>
             				
-  				<header class="header" role="banner" id="gl-main-header" style="background-color: <?php echo (is_front_page() ? 'transparent' : '#f7f7f7') ?>;">
-  							
-  					 <!-- This navs will be applied to the topbar, above all content 
-  						  To see additional nav styles, visit the /parts directory -->
-  					 <?php get_template_part( 'parts/nav', 'offcanvas-topbar' ); ?>
-  	 	
-             
+  				<header class="header" role="banner">
+  						<div class="container">                
+                <!-- This navs will be applied to the topbar, above all content 
+                To see additional nav styles, visit the /parts directory -->
+                <?php get_template_part( 'parts/nav', 'offcanvas-topbar' ); ?>
+              </div>
   				</header> <!-- end .header -->
           
-          <div id="gl-main-content"> <!-- this div was the container -->
+          <main class="main"> <!-- this div was the container -->
+            <div class="container">

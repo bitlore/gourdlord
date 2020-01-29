@@ -83,10 +83,28 @@ add_action('init', 'disable_woo_commerce_sidebar');
 add_filter( 'woocommerce_product_subcategories_hide_empty', 'ts_hide_empty_categories', 10, 1 );
 function ts_hide_empty_categories ( $hide_empty ) {
   $hide_empty = FALSE;
+  return $hide_empty;
 }
 
-function get_images_attachment_url()
-{
+function get_posts_with_tag( $post_tag ) {
+  $the_query = new WP_Query( 'tag='.$post_tag );
+
+  if ( $the_query->have_posts() ) {
+    // echo '<ul>';
+    while ( $the_query->have_posts() ) {
+        $the_query->the_post();
+        echo '<li><a href="' . get_permalink( $the_query, false ) . '">' . get_the_title() . '</a></li>';
+    }
+    // echo '</ul>';
+  } else {
+      // no posts found
+  }
+  /* Restore original Post Data */
+  wp_reset_postdata();
+}
+
+
+function get_images_attachment_url() {
   global $post; 
   $images_urls = array();
 
@@ -97,6 +115,105 @@ function get_images_attachment_url()
   } 
   return $images_urls;
 }
+
+
+
+function gourdlord_product_subcategories( $args = array() ) {
+  $parentid = get_queried_object_id();
+
+	$args = array(
+	 'parent' => $parentid,
+   'hide_empty' => FALSE
+	);
+
+	$terms = get_terms( 'product_cat', $args );
+
+	if ( $terms ) {
+		 echo '<ul class="product-cats">';
+         $i = 0;
+         // if ( is_shop() ) {
+         //   echo '<li class="category left"><h2 class="big"><a href="' . get_site_url() . '/shop">shop</a></h2></li>';
+         // }
+				 foreach ( $terms as $term ) {
+           if ($term->name !== 'Uncategorized') {
+             echo '<li class="category ' . (is_shop() ? 'left' : '') . '">';   
+             // woocommerce_subcategory_thumbnail( $term );
+               echo '<h2 class="big" style="
+                text-decoration:'.($term->count ? 'none' : 'line-through').';
+               ">';
+                 echo '<a href="' .  esc_url( get_term_link( $term ) ) . '" class="' . $term->slug . '">';
+                   echo strtolower($term->name);
+                 echo '</a>';
+               echo '</h2>';
+
+               if ( is_shop() ) {
+                 $cat_thumb_id = get_term_meta( $term->term_id, 'thumbnail_id', true );
+                 // echo $cat_thumb_id;
+                 $shop_catalog_img = wp_get_attachment_image_src( $cat_thumb_id, 'shop_catalog' );
+                 // echo $shop_catalog_img;
+                 echo '<div class="right dynamic' . ($i === 0 ? ' show' : '') . '" style="background-image:
+                  url('.$shop_catalog_img[0].')">';
+                 echo '</div>';
+               }
+               else {
+                 echo do_shortcode('[product_category category="'.$term->name.'"]');
+               }
+             echo '</li>';
+             $i++;
+           }
+		     }
+		 echo '</ul>';
+		}
+  }
+	add_action( 'woocommerce_before_shop_loop', 'gourdlord_product_subcategories', 50 );
+
+
+// basic product category loop
+function list_product_categories() {
+  $taxonomy     = 'product_cat';
+  $orderby      = 'name';  
+  $show_count   = 0;      // 1 for yes, 0 for no
+  $pad_counts   = 0;      // 1 for yes, 0 for no
+  $hierarchical = 1;      // 1 for yes, 0 for no  
+  $title        = '';  
+  $empty        = 0;
+
+  $args = array(
+         'taxonomy'     => $taxonomy,
+         'orderby'      => $orderby,
+         'show_count'   => $show_count,
+         'pad_counts'   => $pad_counts,
+         'hierarchical' => $hierarchical,
+         'title_li'     => $title,
+         'hide_empty'   => $empty
+  );
+  $all_categories = get_categories( $args );
+  foreach ($all_categories as $cat) {
+    if($cat->category_parent == 0 && $cat->name !== 'Uncategorized') {
+        $category_id = $cat->term_id;       
+        echo '<li><a href="'. get_term_link($cat->slug, 'product_cat') .'">'. $cat->name .'</a></li>';
+
+        $args2 = array(
+                'taxonomy'     => $taxonomy,
+                'child_of'     => 0,
+                'parent'       => $category_id,
+                'orderby'      => $orderby,
+                'show_count'   => $show_count,
+                'pad_counts'   => $pad_counts,
+                'hierarchical' => $hierarchical,
+                'title_li'     => $title,
+                'hide_empty'   => $empty
+        );
+        // $sub_cats = get_categories( $args2 );
+        // if($sub_cats) {
+        //     foreach($sub_cats as $sub_category) {
+        //         echo  $sub_category->name ;
+        //     }   
+        // }
+    }       
+  }
+}
+
 
 // function add_event_handlers() {
 //   if(is_page()){
