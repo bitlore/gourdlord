@@ -1,4 +1,4 @@
-<div class="hero" style="background-image: url('/gourdlord/wp-content/themes/gourdlord/assets/images/pour.jpg');">
+<div class="hero" style="background-image: url('<?php echo theme_img_path; ?>/pour.jpg');">
 </div>
 
 <?php get_header(); ?>
@@ -10,7 +10,7 @@
 			<main id="fourohfour" class="grid-x grid-padding-x" role="main">
 				
 					<div class="cell medium-3 small-4">
-						<img src="/gourdlord/wp-content/themes/gourdlord/assets/images/404.png" alt="404" style="height:100%;">
+						<img src="<?php echo theme_img_path; ?>/404.png" alt="404" style="height:100%;">
 					</div>
 					
 					<div class="cell medium-9 small-8">

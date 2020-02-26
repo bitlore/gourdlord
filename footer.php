@@ -8,7 +8,7 @@
     </main> <!-- end former #gl-main-content -->
       
       
-      <?php if (  !is_shop() && !is_home() ): ?>
+      <?php if (  !is_front_page() && !is_shop() && !is_home() ): ?>
       
 			<footer class="footer" role="contentinfo">
         
@@ -29,6 +29,7 @@
               <li>About</li>
               <li><a href="<?php echo get_site_url(); ?>/about">Gourd Lord & Co.</a></li>
               <li><a href="<?php echo get_site_url(); ?>/about#what-is-yerba">Yerba Mate</a></li>
+              <?php get_posts_with_tag( 'footer' ); ?>
             </ul>
           </div>
           <div class="footer-cell small-6 medium-4 large-3 cell">

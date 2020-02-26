@@ -1,5 +1,10 @@
 <?php
 
+//image path
+if( !defined(theme_img_path) ) {
+   define( 'theme_img_path', get_site_url() . '/wp-content/themes/gourdlord/assets/images' );
+}
+
 //print name of template file
 add_filter( 'template_include', 'var_template_include', 1000 );
 function var_template_include( $t ){
@@ -93,7 +98,8 @@ function get_posts_with_tag( $post_tag ) {
     // echo '<ul>';
     while ( $the_query->have_posts() ) {
         $the_query->the_post();
-        echo '<li><a href="' . get_permalink( $the_query, false ) . '">' . get_the_title() . '</a></li>';
+        
+        echo '<li><a href="' . get_permalink( $the_query, false ) . '">' . ucwords( get_the_title() ) . '</a></li>';
     }
     // echo '</ul>';
   } else {
@@ -135,7 +141,7 @@ function gourdlord_product_subcategories( $args = array() ) {
          //   echo '<li class="category left"><h2 class="big"><a href="' . get_site_url() . '/shop">shop</a></h2></li>';
          // }
 				 foreach ( $terms as $term ) {
-           if ($term->name !== 'Uncategorized') {
+           if ( strtolower($term->name) !== 'uncategorized') {
              echo '<li class="category ' . (is_shop() ? 'left' : '') . '">';   
              // woocommerce_subcategory_thumbnail( $term );
                echo '<h2 class="big" style="
@@ -189,7 +195,7 @@ function list_product_categories() {
   );
   $all_categories = get_categories( $args );
   foreach ($all_categories as $cat) {
-    if($cat->category_parent == 0 && $cat->name !== 'Uncategorized') {
+    if($cat->category_parent == 0 && strtolower($cat->name) !== 'uncategorized') {
         $category_id = $cat->term_id;       
         echo '<li><a href="'. get_term_link($cat->slug, 'product_cat') .'">'. $cat->name .'</a></li>';
 

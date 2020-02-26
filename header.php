@@ -46,6 +46,11 @@
                 To see additional nav styles, visit the /parts directory -->
                 <?php get_template_part( 'parts/nav', 'offcanvas-topbar' ); ?>
               </div>
+              <?php if ( ! WC()->cart->is_empty() ) : ?>
+                <a href="<?php echo get_site_url(); ?>/cart" class="go-to-cart">
+                  <img src="<?php echo theme_img_path; ?>/cart-light.png" alt="shopping cart link">
+                </a>
+              <?php endif; ?>
   				</header> <!-- end .header -->
           
           <main class="main"> <!-- this div was the container -->
